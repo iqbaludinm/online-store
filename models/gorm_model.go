@@ -9,7 +9,7 @@ import (
 )
 
 type GormModel struct {
-	ID        uuid.UUID `gorm:"type:uuid"`
+	ID        uuid.UUID `gorm:"type:uuid;primaryKey;not null"`
 	CreatedAt time.Time `json:"created_at" gorm:"column:created_at;type:timestamp;not null"`
 	UpdatedAt time.Time `json:"updated_at" gorm:"column:updated_at;type:timestamp;not null"`
 }
