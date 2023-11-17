@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/iqbaludinm/online-store/app"
 	"github.com/iqbaludinm/online-store/config"
 	"github.com/joho/godotenv"
@@ -23,6 +21,4 @@ func init() {
 
 func main() {
 	app.StartApp()
-
-	fmt.Println("Hello")
 }

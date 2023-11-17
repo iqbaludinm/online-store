@@ -8,6 +8,10 @@ type BaseService struct {
 
 type ServiceInterface interface {
 	UserService
+	CartService
+	CategoryService
+	ProductService
+	CartProductService
 }
 
 func NewService(repo repositories.RepoInterface) ServiceInterface {

@@ -6,10 +6,9 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/google/uuid"
 )
 
-func GenerateToken(id uuid.UUID, email string) string {
+func GenerateToken(id uint, email string) string {
 	claims := jwt.MapClaims{
 		"id":    id,
 		"email": email,

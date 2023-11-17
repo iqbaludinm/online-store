@@ -4,12 +4,11 @@ import (
 	"log"
 	"time"
 
-	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type GormModel struct {
-	ID        uuid.UUID `gorm:"type:uuid;primaryKey;not null"`
+	ID        uint `gorm:"type:int;primaryKey;not null"`
 	CreatedAt time.Time `json:"created_at" gorm:"column:created_at;type:timestamp;not null"`
 	UpdatedAt time.Time `json:"updated_at" gorm:"column:updated_at;type:timestamp;not null"`
 }

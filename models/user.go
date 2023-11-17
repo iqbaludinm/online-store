@@ -18,7 +18,7 @@ type RegisterUser struct {
 	Username string `json:"username" form:"username" example:"iqbaludinm" binding:"required"`
 	Email    string `json:"email" form:"email" binding:"required,email" example:"iqbal@mail.com"`
 	Password string `json:"password" form:"password" binding:"required" example:"iqbal123"`
-	Address  int    `json:"address" form:"address" binding:"required" example:"Jakarta"`
+	Address  string    `json:"address" form:"address" binding:"required" example:"Jakarta"`
 }
 
 type LoginUser struct {

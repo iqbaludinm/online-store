@@ -23,9 +23,9 @@ func (r BaseRepository) RegisterUser(user models.User) (res models.User, err err
 	}
 
 	if existingUser.Username == user.Username {
-		return res, fmt.Errorf("User with username '%s' already exists", user.Username)
+		return res, fmt.Errorf("user with username '%s' already exists", user.Username)
 	} else if existingUser.Email == user.Email {
-		return res, fmt.Errorf("User with email '%s' already exists", user.Email)
+		return res, fmt.Errorf("user with email '%s' already exists", user.Email)
 	}
 
 	err = r.gorm.Create(&user).Scan(&res).Error
@@ -39,7 +39,7 @@ func (r BaseRepository) LoginUser(user models.LoginUser) (res models.User, err e
 	err = r.gorm.Debug().Where("email = ?", user.Email).Take(&res).Error
 	if err != nil {
 		log.Println(err) 
-		return res, errors.New("Invalid Email or Password!")
+		return res, errors.New("invalid email or password")
 	}
 	return res, nil
 }

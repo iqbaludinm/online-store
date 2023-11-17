@@ -7,7 +7,11 @@ type BaseRepository struct {
 }
 
 type RepoInterface interface {
-
+	UserRepository
+	CategoryRepository
+	CartRepository
+	ProductRepository
+	CartProductRepository
 }
 
 func NewRepo(gorm *gorm.DB) *BaseRepository {

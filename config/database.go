@@ -58,7 +58,7 @@ func (g *Gorm) OpenConnection() error {
 
 	g.DB = dbConnection
 
-	err = g.DB.AutoMigrate(&models.User{}, &models.Cart{}, &models.Category{}, &models.Product{})
+	err = g.DB.AutoMigrate(&models.User{}, &models.Cart{}, &models.Category{}, &models.Product{}, &models.CartProduct{})
 	if err != nil {
 		return err
 	}

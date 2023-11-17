@@ -1,6 +1,11 @@
 package services
 
-import "github.com/iqbaludinm/online-store/models"
+import (
+	"errors"
+
+	"github.com/iqbaludinm/online-store/helpers"
+	"github.com/iqbaludinm/online-store/models"
+)
 
 type UserService interface {
 	RegisterUser(user models.RegisterUser) (res models.User, err error)
@@ -8,22 +13,26 @@ type UserService interface {
 }
 
 func (s *BaseService) RegisterUser(user models.RegisterUser) (res models.User, err error) {
-	
-	return 
+	users := models.User{
+		Username: user.Username,
+		Email: user.Email,
+		Password: user.Password,
+		Address: user.Address,
+	}
+	return s.repo.RegisterUser(users)
 }
 
 func (s *BaseService) LoginUser(user models.LoginUser) (res string, err error) {
-	// result, err := s.repo.LoginUser(user)
-	// if err != nil {
-	// 	return res, err
-	// }
-	// isValid := helpers.ComparePass([]byte(result.Password), []byte(user.Password))
-	// if !isValid {
-	// 	return res, errors.New("Invalid Email or Password!")
-	// }
+	result, err := s.repo.LoginUser(user)
+	if err != nil {
+		return res, err
+	}
+	isValid := helpers.ComparePass([]byte(result.Password), []byte(user.Password))
+	if !isValid {
+		return res, errors.New("invalid email or password")
+	}
 
-	// token := helpers.GenerateToken(result.ID, result.Email)
+	token := helpers.GenerateToken(result.ID, result.Email)
 	
-	// return token, nil
-	return
+	return token, nil
 }
