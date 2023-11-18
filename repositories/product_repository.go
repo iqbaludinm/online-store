@@ -22,7 +22,9 @@ func (r BaseRepository) CreateProduct(product models.Product) (res models.Produc
 }
 
 func (r BaseRepository) GetProducts() (products []models.Product, err error) {
-	err = r.gorm.Find(&products).Error
+	err = r.gorm.Preload("Category", func(db *gorm.DB) *gorm.DB {
+		return db.Select("id", "name")
+	}).Find(&products).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return products, nil

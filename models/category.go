@@ -7,7 +7,7 @@ type Category struct {
 }
 
 type InsertCategory struct {
-	Name string `json:"name" binding:"required" gorm:"not null"`
+	Name string `json:"name" binding:"required" "validate":"required" gorm:"not null"`
 }
 
 type UpdateCategory struct {

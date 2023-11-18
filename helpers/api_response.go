@@ -18,7 +18,7 @@ func BadRequest(ctx *fiber.Ctx, message string, data ...interface{}) error {
 	if len(data) > 0 {
 		obj.Data = data[0]
 	}
-	return ctx.JSON(obj)
+	return ctx.Status(400).JSON(obj)
 }
 
 func NotFound(ctx *fiber.Ctx, message string) error {
@@ -27,7 +27,7 @@ func NotFound(ctx *fiber.Ctx, message string) error {
 		Message: message,
 		Data:    nil,
 	}
-	return ctx.JSON(obj)
+	return ctx.Status(404).JSON(obj)
 }
 
 func InternalServerError(ctx *fiber.Ctx, message string, data interface{}) error {
@@ -35,12 +35,9 @@ func InternalServerError(ctx *fiber.Ctx, message string, data interface{}) error
 	obj := Response{
 		Status:  fiber.StatusInternalServerError,
 		Message: message,
+		Data: data,
 	}
-
-	if data == "" {
-		obj.Data = ctx.SendStatus(500)
-	}
-	return ctx.JSON(obj)
+	return ctx.Status(500).JSON(obj)
 }
 
 func Unauthorized(ctx *fiber.Ctx, message string) error {
@@ -49,7 +46,7 @@ func Unauthorized(ctx *fiber.Ctx, message string) error {
 		Message: message,
 		Data:    ctx.SendStatus(401),
 	}
-	return ctx.JSON(obj)
+	return ctx.Status(401).JSON(obj)
 }
 
 // Success Response
@@ -60,7 +57,7 @@ func Created(ctx *fiber.Ctx, message string, data interface{}) error {
 		Data:    data,
 	}
 
-	return ctx.JSON(obj)
+	return ctx.Status(201).JSON(obj)
 }
 
 func Success(ctx *fiber.Ctx, message string, data interface{}) error {
@@ -69,5 +66,5 @@ func Success(ctx *fiber.Ctx, message string, data interface{}) error {
 		Message: message,
 		Data:    data,
 	}
-	return ctx.JSON(obj)
+	return ctx.Status(200).JSON(obj)
 }

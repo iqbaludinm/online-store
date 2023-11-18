@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/iqbaludinm/online-store/handlers"
-	_ "github.com/iqbaludinm/online-store/middlewares"
+	"github.com/iqbaludinm/online-store/middlewares"
 )
 
 func RegisterAPIs(app *fiber.App, server handlers.HttpServer) {
@@ -27,7 +27,7 @@ func RegisterAPIs(app *fiber.App, server handlers.HttpServer) {
 	category.Get("/", server.GetCategories)
 
 	// Carts
-	cart := v1.Group("/carts")
+	cart := v1.Group("/carts", middlewares.Authentication())
 	cart.Post("/", server.CreateCart)
 	cart.Get("/", server.GetCarts)
 
