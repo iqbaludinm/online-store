@@ -2,6 +2,11 @@ package helpers
 
 import "github.com/go-playground/validator/v10"
 
+type Form struct {
+	Field   string
+	Message string
+}
+
 func FormValidationError(fe validator.FieldError) string {
 	switch fe.Tag() {
 	case "required":
@@ -20,8 +25,6 @@ func FormValidationError(fe validator.FieldError) string {
 		return fe.Field() + " harus sama dengan " + fe.Param() + "!"
 	case "alphanumunicode":
 		return fe.Field() + " harus berisi karakter, huruf dan angka!"
-	case "gt":
-		return fe.Field() + " harus diatas 8 tahun!"
 	default:
 		return fe.Field() + " tidak valid!"
 	}

@@ -1,6 +1,5 @@
 package handlers
 
-
 import (
 	"errors"
 	"log"
@@ -11,9 +10,9 @@ import (
 	"github.com/iqbaludinm/online-store/models"
 )
 
-func (h HttpServer) CreateProduct(ctx *fiber.Ctx) error {
-	product := new(models.InsertProduct)
-	err := ctx.BodyParser(product)
+func (h HttpServer) CreateCartProduct(ctx *fiber.Ctx) error {
+	cartProduct := new(models.InsertCartProduct)
+	err := ctx.BodyParser(cartProduct)
 	if err != nil {
 		log.Println(err)
 		var verr validator.ValidationErrors
@@ -26,22 +25,22 @@ func (h HttpServer) CreateProduct(ctx *fiber.Ctx) error {
 				}
 			}
 			log.Println(verr)
-			return helpers.BadRequest(ctx, "Failed to add new category", res)
+			return helpers.BadRequest(ctx, "Failed to add new cart product", res)
 		}
 		return helpers.InternalServerError(ctx, "Something's wrong with your input", err.Error())
 	}
 
-	cat, err := h.app.CreateProduct(*product)
+	cat, err := h.app.CreateCartProduct(*cartProduct)
 	if err != nil {
-		return helpers.InternalServerError(ctx, "Failed to add new product", err.Error())
+		return helpers.InternalServerError(ctx, "Failed to add new cart product", err.Error())
 	}
-	return helpers.Created(ctx, "Successfully add new product!", cat)
+	return helpers.Created(ctx, "Successfully add new cart product!", cat)
 }
 
-func (h HttpServer) GetProducts(ctx *fiber.Ctx) error {
-	listProducts, err := h.app.GetProducts()
+func (h HttpServer) GetCartProducts(ctx *fiber.Ctx) error {
+	listCartProducts, err := h.app.GetProducts()
 	if err != nil {
 		return helpers.InternalServerError(ctx, "failed to retrieve all products", err.Error())
 	}
-	return helpers.Success(ctx, "Succesfully Retrieve All Products", listProducts)
+	return helpers.Success(ctx, "Succesfully Retrieve All Products", listCartProducts)
 }
