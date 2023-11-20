@@ -24,7 +24,7 @@ func (h HttpServer) CreateCartProduct(ctx *fiber.Ctx) error {
 }
 
 func (h HttpServer) GetCartProducts(ctx *fiber.Ctx) error {
-	listCartProducts, err := h.app.GetProducts()
+	listCartProducts, err := h.app.GetCartProducts()
 	if err != nil {
 		return helpers.InternalServerError(ctx, "failed to retrieve all products", err.Error())
 	}

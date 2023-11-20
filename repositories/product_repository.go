@@ -7,7 +7,7 @@ import (
 
 type ProductRepository interface {
 	CreateProduct(product models.Product) (res models.Product, err error)
-	GetProducts() (products []models.Product, err error)
+	GetProducts(category string) (products []models.Product, err error)
 	GetProductById(id int64) (product models.Product, err error)
 	UpdateProduct(id int64, product models.Product) (res models.Product, err error)
 	DeleteProduct(id int64) (res models.Product, err error)
@@ -21,10 +21,8 @@ func (r BaseRepository) CreateProduct(product models.Product) (res models.Produc
 	return res, err
 }
 
-func (r BaseRepository) GetProducts() (products []models.Product, err error) {
-	err = r.gorm.Preload("Category", func(db *gorm.DB) *gorm.DB {
-		return db.Select("id", "name")
-	}).Find(&products).Error
+func (r BaseRepository) GetProducts(category string) (products []models.Product, err error) {
+	err = r.gorm.Preload("Category").Joins("JOIN categories ON products.category_id = categories.id").Where("categories.name = ?", category).Find(&products).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return products, nil

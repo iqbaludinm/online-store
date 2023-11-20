@@ -26,9 +26,10 @@ func (h HttpServer) CreateProduct(ctx *fiber.Ctx) error {
 }
 
 func (h HttpServer) GetProducts(ctx *fiber.Ctx) error {
-	listProducts, err := h.app.GetProducts()
+	category := ctx.Query("category")
+	listProductByCategory, err := h.app.GetProducts(category)
 	if err != nil {
 		return helpers.InternalServerError(ctx, "failed to retrieve all products", err.Error())
 	}
-	return helpers.Success(ctx, "Succesfully Retrieve All Products", listProducts)
+	return helpers.Success(ctx, "Succesfully Retrieve All Products", listProductByCategory)
 }

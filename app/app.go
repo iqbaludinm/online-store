@@ -4,13 +4,14 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/iqbaludinm/online-store/config"
 	"github.com/iqbaludinm/online-store/handlers"
+	"github.com/iqbaludinm/online-store/helpers"
 	"github.com/iqbaludinm/online-store/repositories"
-	"github.com/iqbaludinm/online-store/services"
 	routesV1 "github.com/iqbaludinm/online-store/routes"
+	"github.com/iqbaludinm/online-store/services"
 )
 
 var app = fiber.New()
@@ -27,7 +28,7 @@ func StartApp() {
 	
 	// handle unavailable route
 	app.Use(func(c *fiber.Ctx) error {
-		return c.SendStatus(404) // => 404 "Not Found"
+		return helpers.NotFound(c, "Route not found")
 	})
 	
 

@@ -32,7 +32,7 @@ func RegisterAPIs(app *fiber.App, server handlers.HttpServer) {
 	cart.Get("/", server.GetCarts)
 
 	// Products
-	product := v1.Group("/products")
+	product := v1.Group("/products", middlewares.Authentication())
 	product.Post("/", server.CreateProduct)
 	product.Get("/", server.GetProducts)
 	// Get All Product List with Query Param Category -> /products?category=electronic
