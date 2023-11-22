@@ -12,7 +12,9 @@
 
 ### Tentang
 
-Online Store API merupakan sebuah project RESTful API Online Shopp. Project ini dibuat menggunakan bahasa pemrograman Go dan menggunakan framework Fiber. Dalam implementasi pemprograman dan layout menggunakan Clean Architecture yang dipopulerkan oleh Uncle Bob. Project ini dibuat dengan menggunakan database PostgreSQL dan dideploy menggunakan Docker dan AWS.
+Online Store API merupakan sebuah project RESTful API Online Shop yang dimana user dapat melihat product berdasarkan kategori yang ada - menambahkan produk tersebut ke keranjangnya (user yang telah terdaftar dalam database) - dan sampai melakukan payment. Project ini dibuat menggunakan bahasa pemrograman Go dan menggunakan framework Fiber. Dalam implementasi pemprograman dan layout menggunakan Clean Architecture yang dipopulerkan oleh Uncle Bob. Project ini dibuat dengan menggunakan database PostgreSQL dan dideploy menggunakan Docker dan AWS. Berikut ini adalah desain database relational yang telah dikembangkan.
+
+![Online Shop Database](./assets/online-shop-database.png)
 
 ----
 ### Panduan Menjalankan
@@ -54,11 +56,12 @@ Untuk menjalankan menggunakan nodemon dapat menggunakan command sebagai berikut:
 - [x] JWT Security
 - [x] Database migration
 - [x] Docker Support
-- [x] Open API / Swagger
+- [ ] Open API / Swagger
 - [x] Http Client
 - [x] Error Handling
 - [x] Logging
 - [x] Cache
+- [ ] Payment Gateway Integration (Midtrans)
 
 ----
 
